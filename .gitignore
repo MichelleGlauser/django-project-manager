@@ -3,3 +3,4 @@ django-project-manager
 *.pot
 *.pyc
 .DS_Store
+staticfiles
