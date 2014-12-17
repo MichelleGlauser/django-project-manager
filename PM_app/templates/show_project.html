@@ -8,15 +8,16 @@
     <div class="row clearfix">
         <div class="column full">
             <div class="projects">
-                <h2>Projects:</h2>
-                {% for project in projects %}
-                    <ul>
-                    <li><a href="{% url 'PM_app.views.show_project' pk=project.pk %}">{{ project.name }}</a></li>
-                    </ul>
+            {{ project.name }}
+                <ul>Tasks:
+                {% for task in tasks %}
+                    <li>{{ task.name }}</li>
+                    <li>{{ task.description }}</li>
+                    <li>{{ task.difficulty_level }}</li>
+                </ul>
                 {% endfor %}
-                <a href="{% url 'PM_app.views.create_project' %}">Create New Project</a>
-
             </div>
+            <a href="{% url 'PM_app.views.create_task' %}">Create New task</a>
         </div>
     </div>
     <div class="row clearfix">
