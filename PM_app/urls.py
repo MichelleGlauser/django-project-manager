@@ -5,5 +5,4 @@ from django.conf import settings
 if settings.DEBUG:
     urlpatterns = patterns('',
         url(r'^$', views.index, name='index')
-        url(r'^$', 'PM_app.views.index', name='home'),
     )
