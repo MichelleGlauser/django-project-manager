@@ -4,3 +4,4 @@ django-project-manager
 *.pyc
 .DS_Store
 staticfiles
+djangopm
