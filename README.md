@@ -1,4 +1,1 @@
-A sample project manager project +django-project-manager
-+=====================
-+
-+A sample project in Django.
+A sample project manager project in Django.
