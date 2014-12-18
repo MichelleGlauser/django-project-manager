@@ -11,11 +11,14 @@
             {{ project.name }}
                 <ul>Tasks:
                 {% for task in tasks %}
-                    <li>{{ task.name }}</li>
-                    <li>{{ task.description }}</li>
-                    <li>{{ task.difficulty_level }}</li>
-                </ul>
+                    <li>Name: {{ task.name }}</li>
+                    <li>Description: {{ task.description }}</li>
+                    <li>Difficulty Level: {{ task.difficulty_level }}</li>
+                    <a href="">Edit Task</a>
+                    </br>
+                    </br>
                 {% endfor %}
+                </ul>
             </div>
             <a href="{% url 'PM_app.views.create_task' %}">Create New task</a>
         </div>
