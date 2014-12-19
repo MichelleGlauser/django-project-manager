@@ -14,13 +14,13 @@
                     <li>Name: {{ task.name }}</li>
                     <li>Description: {{ task.description }}</li>
                     <li>Difficulty Level: {{ task.difficulty_level }}</li>
-                    <a href="{% url 'PM_app.views.edit_task' %}">Edit Task</a>
+                    <a href="{% url 'edit_task' project_pk=project.pk task_pk=task.pk %}">Edit Task</a>
                     </br>
                     </br>
                 {% endfor %}
                 </ul>
             </div>
-            <a href="{% url 'PM_app.views.create_task' %}">Create New task</a>
+            <a href="{% url 'create_task' project_pk=project.pk %}">Create New Task</a>
         </div>
     </div>
     <div class="row clearfix">

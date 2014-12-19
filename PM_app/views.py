@@ -11,11 +11,6 @@ def list_projects(request):
 	projects = Project.objects.all()
 	return render(request, 'index.html', {'projects': projects})
 
-def show_project(request, pk):
-	project = get_object_or_404(Project, pk=pk)
-	tasks = get_list_or_404(Task)
-	return render(request, 'show_project.html', {'project': project, 'tasks': tasks})
-
 def create_project(request):
 	if request.method == "POST":
 		form = ProjectForm(request.POST)
@@ -27,19 +22,21 @@ def create_project(request):
 		form = ProjectForm()
 	return render(request, 'create_project.html', {'form': form})
 
-def create_task(request):
+def show_project(request, project_pk):
+	project = get_object_or_404(Project, pk=project_pk)
+	tasks = get_list_or_404(Task)
+	return render(request, 'show_project.html', {'project': project, 'tasks': tasks})
+
+def create_task(request, project_pk):
+	project = get_object_or_404(Project, pk=project_pk)
 	if request.method == "POST":
 		form = TaskForm(request.POST)
 		if form.is_valid():
 			task = form.save()
-
-
+			task.project = project 
+			task.save()
 			# project.task_set.add(task)
 
-			# # or
-
-			# task.project = project
-			# task.save()
 			return redirect('PM_app.views.show_project', pk=project.pk)
 	else:
 		form = TaskForm()
@@ -51,14 +48,14 @@ class TaskUpdate(UpdateView):
 	template_name = 'edit_task.html'
 	form_class = TaskForm
 
-def edit_task(request):
-	instance = Project.objects.get(id=id)
+def edit_task(request, task_pk, project_pk):
+	instance = Task.objects.get(id=task_pk)
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=instance)
 		if form.is_valid():
 			task = form.save(commit=False)
 			task.save()
-			return redirect('PM_app.views.show_project', pk=project.pk)
+			return redirect('PM_app.views.show_project', task_pk=project.pk)
 	else:
 		form = TaskForm()
 	return render(request, 'edit_task.html', {'form': form})	
