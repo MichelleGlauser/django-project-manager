@@ -29,7 +29,7 @@ def create_project(request):
 
 def create_task(request):
 	if request.method == "POST":
-		form = TaskUpdate(request.POST)
+		form = TaskForm(request.POST)
 		if form.is_valid():
 			task = form.save()
 
@@ -42,8 +42,8 @@ def create_task(request):
 			# task.save()
 			return redirect('PM_app.views.show_project', pk=project.pk)
 	else:
-		form = TaskUpdate()
-	return render(request, 'task_edit_form.html', {'form': form})
+		form = TaskForm()
+	return render(request, 'create_task.html', {'form': form})
 
 class TaskUpdate(UpdateView):
 	model = Task
@@ -52,8 +52,9 @@ class TaskUpdate(UpdateView):
 	form_class = TaskForm
 
 def edit_task(request):
+	instance = Project.objects.get(id=id)
 	if request.method == "POST":
-		form = TaskForm(request.POST)
+		form = TaskForm(request.POST, instance=instance)
 		if form.is_valid():
 			task = form.save(commit=False)
 			task.save()

@@ -11,5 +11,5 @@ if settings.DEBUG:
     	url(r'^project/new/$', views.create_project),
     	url(r'^task/new/$', views.create_task),
     	url(r'^task/edit/$', views.edit_task),
-
+    	# url(r'^task/edit/$', TaskUpdate.as_view()),
     )
