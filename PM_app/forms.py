@@ -9,4 +9,4 @@ class ProjectForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
 	class Meta:
 		model = Task
-		fields = ('name', 'description', 'difficulty_level',)
+		fields = ('name', 'description', 'difficulty_level')
