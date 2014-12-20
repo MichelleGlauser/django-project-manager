@@ -24,7 +24,7 @@ def create_project(request):
 def show_project(request, project_pk):
 	project = get_object_or_404(Project, pk=project_pk)
 	# Needs to show specific tasks for this project:
-	tasks = Task.objects.filter(id=project_pk)
+	tasks = Task.objects.filter(project=project_pk)
 	# tasks = get_list_or_404(Task)
 	return render(request, 'show_project.html', {'project': project, 'tasks': tasks})
 
@@ -53,7 +53,7 @@ class TaskUpdate(UpdateView):
 
 def edit_task(request, task_pk, project_pk):
 	# Needs to show previous values for this task:
-	instance = Task.objects.get(id=project_pk)
+	instance = Task.objects.filter(project=project_pk)
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=instance)
 		if form.is_valid():
