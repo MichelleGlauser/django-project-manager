@@ -22,7 +22,14 @@
             <div class="projects">
             {{ project.name }}
                 <ul class="tasks">Tasks:
-
+                <!-- {% for task in tasks %}
+                    <li>Name: {{ task.name }}</li>
+                    <li>Description: {{ task.description }}</li>
+                    <li>Difficulty Level: {{ task.difficulty_level }}</li>
+                    <a href="{% url 'edit_task' project_pk=project.pk task_pk=task.pk %}">Edit Task</a>
+                    </br>
+                    </br>
+                {% endfor %} -->
                 </ul>
             </div>
             <a href="{% url 'create_task' project_pk=project.pk %}">Create New Task</a>
