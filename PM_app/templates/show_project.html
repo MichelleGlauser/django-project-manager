@@ -7,13 +7,12 @@
 {% block content %}
     <script>
     window.onload = function (){
-        var project_id = {{ project_pk }}
+        var project_id = {{ project.id }}
         $.ajax({
           url: '/project/' + project_id + '/tasks'
         }).done(function(results) {
-            console.log(results);
             for (var i=0; i<results.length; i++) {
-                $('.tasks').append('<li>Task name: ' + results[i].name + '</li>' + '<li>Description: ' + results[i].description + '</li>' + '<li>Difficulty level: ' + results[i].difficult_level + '</li>' + '</br>');
+                $('.tasks').append('<li>Task name: ' + results[i].fields.name + '</li>' + '<li>Description: ' + results[i].fields.description + '</li>' + '<li>Difficulty level: ' + results[i].fields.difficulty_level + '</li>' + '</br>');
             }
         });
     }

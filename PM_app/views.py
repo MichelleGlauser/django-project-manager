@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.views.generic.edit import UpdateView
+from django.http import HttpResponse
 from django.core.serializers import serialize
 from PM_app.models import Project, Task
 from .forms import ProjectForm, TaskForm
@@ -67,4 +68,4 @@ def edit_task(request, task_pk, project_pk):
 
 def list_tasks(request, project_pk):
 	project = get_object_or_404(Project, pk=project_pk)
-	return HttpResponse(serialize('json', project.tasks.all()), content_type='application/json')	
+	return HttpResponse(serialize('json', project.task_set.all()), content_type='application/json')	
