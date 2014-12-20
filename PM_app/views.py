@@ -33,11 +33,10 @@ def create_task(request, project_pk):
 	if request.method == "POST":
 		form = TaskForm(request.POST)
 		if form.is_valid():
-			task = form.save()
 			# Save the underyling model:
-			form.save(commit=False)
+			task = form.save(commit=False)
 			# Needs to link this new task to a specific project:
-			task.project_id = project.pk
+			task.project_id = project_pk
 			task.save()
 			# project.task_set.add(task)
 
