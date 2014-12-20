@@ -23,13 +23,12 @@ def create_project(request):
 		form = ProjectForm()
 	return render(request, 'create_project.html', {'form': form})
 
-def show_project(request, project_pk, task_pk):
+def show_project(request, project_pk):
 	project = get_object_or_404(Project, pk=project_pk)
 	# Needs to show specific tasks for this project:
 	tasks = Task.objects.filter(project=project_pk)
-	task = Task.objects.get(task=task_pk)
 	# tasks = get_list_or_404(Task)
-	return render(request, 'show_project.html', {'project': project, 'tasks': tasks, 'task':task})
+	return render(request, 'show_project.html', {'project': project, 'tasks': tasks})
 
 def create_task(request, project_pk):
 	project = get_object_or_404(Project, pk=project_pk)

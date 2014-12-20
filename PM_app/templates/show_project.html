@@ -7,14 +7,12 @@
 {% block content %}
     <script>
     window.onload = function (){
-        var project_id = {{ project.id }};
+        var project_id = {{ project.id }}
         $.ajax({
           url: '/project/' + project_id + '/tasks'
         }).done(function(results) {
-            var project_id = {{ project.id }};
-            var task_id = {{ task.id }};
             for (var i=0; i<results.length; i++) {
-                $('.tasks').append('<li>Task name: ' + results[i].fields.name + '</li>' + '<li>Description: ' + results[i].fields.description + '</li>' + '<li>Difficulty level: ' + results[i].fields.difficulty_level + '</li>' + '<li>' + '<a href="/project/' + project_id + '/task/' + task_id + '/edit' '>Edit Task</a>' + '</li>' + '</br>');
+                $('.tasks').append('<li>Task name: ' + results[i].fields.name + '</li>' + '<li>Description: ' + results[i].fields.description + '</li>' + '<li>Difficulty level: ' + results[i].fields.difficulty_level + '</li>' + '</br>');
             }
         });
     }
