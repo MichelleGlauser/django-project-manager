@@ -9,7 +9,7 @@
         <div class="column full">
             <div class="projects">
             {{ project.name }}
-                <ul>Tasks:
+                <ul class="tasks">Tasks:
                 {% for task in tasks %}
                     <li>Name: {{ task.name }}</li>
                     <li>Description: {{ task.description }}</li>
@@ -31,4 +31,14 @@
             <!-- Your Content -->
         </div>
     </div>
+    <script>
+    $.ajax({
+      url: "{% project/<project_id>/tasks %}",
+    }).done(function(results) {
+        console.log(results);
+        for (var i=0; i<results.length; i++) {
+            $('.tasks').append('<p>Task name: ' + results[i].name + '</p>' + '<p>Description: ' + results[i].description + '</p>' + '<p>Difficulty level: ' + results[i].difficult_level + '</p>' + '</br>');
+        }
+    });
+    </script>
 {% endblock content %}
