@@ -53,13 +53,13 @@ class TaskUpdate(UpdateView):
 
 def edit_task(request, task_pk, project_pk):
 	# Needs to show previous values for this task:
-	instance = Task.objects.filter(project=project_pk)
+	instance = Task.objects.get(id=task_pk)
 	if request.method == "POST":
 		form = TaskForm(request.POST, instance=instance)
 		if form.is_valid():
 			task = form.save(commit=False)
 			task.save()
-			return redirect('show_project', project_pk=project.pk)
+			return redirect('show_project', project_pk=project_pk)
 	else:
-		form = TaskForm()
+		form = TaskForm(instance=instance)
 	return render(request, 'edit_task.html', {'form': form})	
