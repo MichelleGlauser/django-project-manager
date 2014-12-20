@@ -5,19 +5,25 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+    <script>
+    window.onload = function (){
+        var project_id = {{ project_pk }}
+        $.ajax({
+          url: '/project/' + project_id + '/tasks'
+        }).done(function(results) {
+            console.log(results);
+            for (var i=0; i<results.length; i++) {
+                $('.tasks').append('<li>Task name: ' + results[i].name + '</li>' + '<li>Description: ' + results[i].description + '</li>' + '<li>Difficulty level: ' + results[i].difficult_level + '</li>' + '</br>');
+            }
+        });
+    }
+    </script>
     <div class="row clearfix">
         <div class="column full">
             <div class="projects">
             {{ project.name }}
                 <ul class="tasks">Tasks:
-                {% for task in tasks %}
-                    <li>Name: {{ task.name }}</li>
-                    <li>Description: {{ task.description }}</li>
-                    <li>Difficulty Level: {{ task.difficulty_level }}</li>
-                    <a href="{% url 'edit_task' project_pk=project.pk task_pk=task.pk %}">Edit Task</a>
-                    </br>
-                    </br>
-                {% endfor %}
+
                 </ul>
             </div>
             <a href="{% url 'create_task' project_pk=project.pk %}">Create New Task</a>
@@ -31,14 +37,6 @@
             <!-- Your Content -->
         </div>
     </div>
-    <script>
-    $.ajax({
-      url: "{% project/<project_id>/tasks %}",
-    }).done(function(results) {
-        console.log(results);
-        for (var i=0; i<results.length; i++) {
-            $('.tasks').append('<p>Task name: ' + results[i].name + '</p>' + '<p>Description: ' + results[i].description + '</p>' + '<p>Difficulty level: ' + results[i].difficult_level + '</p>' + '</br>');
-        }
-    });
-    </script>
+
+    
 {% endblock content %}
